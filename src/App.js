@@ -3,14 +3,58 @@ import { BsPlayFill } from 'react-icons/bs'
 import FooterMobile from './components/FooterMobile'
 import HeaderMobile from './components/HeaderMobile'
 import Video from './components/Video'
-import link from './assets/videos/hot-girl.mp4'
-import link2 from './assets/videos/hot-girl2.mp4'
 import useSwipe from './utils/useSwipe'
+
+const videos = [
+    {
+        id: 1,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648810907/video_ohhot/hot-girl_x55c8l.mp4'
+    },
+    {
+        id: 2,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811723/video_ohhot/hot-girl6_tuexap.mp4'
+    },
+    {
+        id: 3,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811729/video_ohhot/hot-girl7_qtchxg.mp4'
+    },
+    {
+        id: 4,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811730/video_ohhot/hot-girl8_r3dclg.mp4'
+    },
+    {
+        id: 5,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811730/video_ohhot/hot-girl9_dcloc4.mp4'
+    },
+    {
+        id: 6,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811731/video_ohhot/hot-girl11_w7yqtv.mp4'
+    },
+    {
+        id: 7,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811735/video_ohhot/hot-girl10_up5ifg.mp4'
+    },
+    {
+        id: 8,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811741/video_ohhot/hot-girl4_p9o1pp.mp4'
+    },
+    {
+        id: 9,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811753/video_ohhot/hot-girl2_horrx2.mp4'
+    },
+    {
+        id: 10,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811756/video_ohhot/hot-girl3_w6smgc.mp4'
+    },
+    {
+        id: 11,
+        url: 'https://res.cloudinary.com/ohhot/video/upload/v1648811760/video_ohhot/hot-girl5_mdtzf3.mp4'
+    }
+]
 
 function App() {
     const [isPlay, setIsPlay] = useState(false)
-    const videoLinkList = [link, link2]
-    const [videoLink, setVideoLink] = useState(videoLinkList[0])
+    const [videoLink, setVideoLink] = useState(videos[0].url)
     const videoRef = useRef()
     const isPause = useRef()
 
@@ -38,21 +82,23 @@ function App() {
           setIsPlay(!isPlay)
         }
       }
-      window.addEventListener("keyup", handleKeyup)
+      window.addEventListener('keyup', handleKeyup)
 
-      return () => window.removeEventListener("keyup", handleKeyup)
+      return () => window.removeEventListener('keyup', handleKeyup)
     }, [isPlay])
 
     useSwipe(() => {
-      let index = videoLinkList.indexOf(videoLink)
-      if (index === videoLinkList.length - 1) {
+      const videoList = []
+      videos.map(video => videoList.push(video.url))
+      let index = videoList.indexOf(videoLink)
+      if (index === videoList.length - 1) {
           index = 0
           isPause.current = true
-          setVideoLink(videoLinkList[index])
+          setVideoLink(videoList[index])
       }
       else {
         isPause.current = true
-        setVideoLink(videoLinkList[index + 1])
+        setVideoLink(videoList[index + 1])
       }
     }, 'down')
 

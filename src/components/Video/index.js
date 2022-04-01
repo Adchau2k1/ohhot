@@ -18,11 +18,12 @@ function Video(props, ref) {
 
     return (
         <video 
-            className="w-full h-full"
+            className="w-full h-full object-cover"
             ref={videoRef}
             src={src}
             loop
             autoPlay
+            playsInline
         />
     )
 }

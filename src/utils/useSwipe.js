@@ -34,16 +34,17 @@ function useSwipe(callback, action) {
                 /* left swipe */
             }                       
         } else {
-            if (yDiff > 0  && action === 'down') {
-                /* down swipe */ 
+            console.log(yDiff)
+            if (yDiff >= 20  && action === 'down') {
+                /* down swipe */
                 callback()
                 document.removeEventListener('touchstart', handleTouchStart, false)        
                 document.removeEventListener('touchmove', handleTouchMove, false)
-            } else { 
+            } else if (yDiff <= -20) { 
                 /* up swipe */
-                // callback()
-                // document.removeEventListener('touchstart', handleTouchStart, false)        
-                // document.removeEventListener('touchmove', handleTouchMove, false)
+                callback()
+                document.removeEventListener('touchstart', handleTouchStart, false)        
+                document.removeEventListener('touchmove', handleTouchMove, false)
             }                                                               
         }
         /* reset values */
